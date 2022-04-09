@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ethers } from 'ethers';
+import { BigNumber, ethers } from 'ethers';
 import { Button, Card, Table } from 'react-bootstrap';
 import connect from '../utils/connect';
 import HeaderAdmin from '../components/HeaderAdmin';
@@ -10,6 +10,8 @@ const ipfs = create({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' });
 
 export default function Explorer() {
     const [txDetails, setTxDetails] = useState([]);
+    let val = ethers.utils.formatEther("0x01f4");
+    console.log(val);
 
     const fetchTxDetails = async () => {
         const txs = [];
@@ -19,7 +21,7 @@ export default function Explorer() {
             if (chunk[0]) {
                 console.info(chunk[0]);
                 for await (const buf of ipfs.cat(chunk[0])) {
-                    const data = JSON.parse(String.fromCharCode.apply(null, buf))
+                    const data = JSON.parse(String.fromCharCode.apply(null, buf))                    
                     txs.push(data);
                 }
             }
@@ -38,8 +40,7 @@ export default function Explorer() {
                     <Card.Body>
                         <Table bordered responsive>
                             <thead>
-                                <tr>
-                                    <th>Role</th>
+                                <tr>                                    
                                     <th>From</th>                                    
                                     <th>To</th>
                                     <th>TimeStamp</th>
@@ -51,12 +52,10 @@ export default function Explorer() {
                             </thead>
                             <tbody>
                                 {txDetails.map((tx) => (                                    
-                                    <tr>
-                                        <td>{tx.roleAccess}</td>
+                                    <tr>                                    
                                         <td>{tx.orderMadeBy}</td>
                                         <td>{tx.orderedTo}</td>
-                                        <td>{(tx.date)}</td>
-                                        {/* <td>{(tx.date).getMonth() +'-'+(tx.date).getMonth()+ '-'+(tx.date).getFullYear()+', '+(tx.date).getHours()+':'+(tx.date).getMinutes()+':'+ (tx.date).getMilliseconds()}</td> */}
+                                        <td>{tx.orderedDate}</td>                                        
                                         <td><b>{ethers.utils.formatEther(tx.amount) + ' ETH'}</b></td>
                                         <td>{tx.dosesCount}</td>
                                         <td>{tx.vaccineType}</td>

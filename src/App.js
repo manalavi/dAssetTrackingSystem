@@ -3,41 +3,62 @@ import React, { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import About from './pages/About';
-import ContactUs from './pages/ContactUs';
+import Contact from './pages/Contact';
 import Login from './pages/Login';
 import Logout from './pages/Logout';
-import Admin from './pages/Admin-Dashboard';
+import ManufAdmin from './pages/ManufAdmin';
 import Profile from './pages/Profile';
 import Explorer from './pages/Explorer';
 import OrderVaccine from './pages/OrderVaccine';
 import HealthCAdmin from './pages/HealthCAdmin';
+import HealthOrderUpdate from './pages/HealthOrderUpdate';
+import DistrOrderUpdate from './pages/DistrOrderUpdate';
+import DistrAdmin from './pages/DistrAdmin';
+import ManufOrderUpdate from './pages/ManufOrderUpdate';
+import RouteMap from './pages/RouteMap'
 function App() {
 
   const [auth, setAuth] = useState(false);  
+  const role = localStorage.getItem('role')
+
   return (
-    <>
-      <div className="App" style={{ margin: '5em 2em' }}>
-        {/* <h2>Vaccine Tracking Dapp</h2> */}
+    <div>      
+      <div className="App" 
+      style={{ margin: '5em 2em' }}
+      >
+        {/* <h2>Vaccine Tracking Dapp</h2> */}        
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route exact path="/about" element={<About />} />
-          <Route exact path="/contactus" element={<ContactUs />} />
+          <Route exact path="/contact" element={<Contact />} />
           {/* <Route element={<ProtectedRoutes />}> */}
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/logout" element={<Logout />} />
+    
           {/* Manufacturer Admin */}
-          <Route path="/admin/:username" element={<Admin />} />
-          <Route path="/admin/:username/profile" element={<Profile />} />
-          <Route path="/admin/:username/explorer" element={<Explorer />} />
+          <Route path="/manufadmin/:username/dashboard" element={<ManufAdmin />} />
+          <Route path="/manufadmin/:username/profile" element={<Profile />} />          
+          <Route path="/manufadmin/:username/routemap" element={<RouteMap />} />                    
+          <Route path="/manufadmin/:username/explorer" element={<Explorer />} />
+
+          {/* Distributor Admin */}
+          <Route path="/distradmin/:username/dashboard" element={<DistrAdmin/>} />
+          <Route path="/distradmin/:username/profile" element={<Profile/>} />
+          <Route path="/distradmin/:username/routemap" element={<RouteMap/>} />
+          <Route path="/distradmin/:username/explorer" element={<Explorer />} />
+          
           {/* HealthCare Admin */}
-          {/* <Route path="/healthcadmin/:username" element={<HealthCAdmin />} />
-          <Route path="/healthcadmin/:username/profile" element={<Profile />} /> */}
-          <Route path="/healthcadmin/:username/neworder" element={<OrderVaccine/>} />
-          {/* <Route path="/healthcadmin/:username/explorer" element={<Explorer />} /> */}
+          <Route path="/healthcadmin/:username/dashboard" element={<HealthCAdmin />} />
+          <Route path="/healthcadmin/:username/profile" element={<Profile />} />
+          <Route path="/healthcadmin/:username/neworder" element={<OrderVaccine/>} />                    
+          <Route path="/healthcadmin/:username/routemap" element={<RouteMap />} />          
+          <Route path="/healthcadmin/:username/orderstatus" element={<HealthOrderUpdate/>} />
+          <Route path="/healthcadmin/:username/explorer" element={<Explorer />} />
+                    
           <Route path="*" element={<Home />} />
         </Routes>
       </div>
-    </>
+    </div>
   );
 }
 

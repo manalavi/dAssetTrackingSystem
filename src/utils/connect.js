@@ -7,8 +7,8 @@ export default function connect() {
     const tempProvider = new ethers.providers.Web3Provider(window.ethereum);
     // const accounts = await tempProvider.listAccounts();
     const signer = tempProvider.getSigner();
-    const contractAddress = "0x16ee43328E0f7C59838a5b29315a0205BAbB3FEC";
+    const contractAddress = "0x9598B813eBB39A9ef77e842593cD1594ACd5DEf7";
     // const network = await tempProvider.getNetwork();
-    const my_contract = new ethers.Contract(contractAddress, Contract_abi, signer);        
+    const my_contract = new ethers.Contract(ethers.utils.getAddress(contractAddress), Contract_abi, signer);        
     return (my_contract);
 }

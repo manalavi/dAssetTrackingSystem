@@ -2,7 +2,6 @@ import { ethers } from 'ethers';
 import React, { useState } from 'react';
 // import { ethers } from 'ethers';
 import { Card, FormControl, Col, Row, Button, InputGroup } from 'react-bootstrap';
-import BlockChainExplorer from '../components/BlockChainExpolorer';
 import connect from '../utils/connect';
 import HeaderAdmin from '../components/HeaderAdmin'
 
@@ -66,13 +65,7 @@ export default function Profile() {
     }
 
     return (
-        <div>
-            <div hidden><BlockChainExplorer 
-            txAccount={data.txAccount} 
-            mined={data.mined} 
-            blockNo={data.blockNo} 
-            gasPrice={data.gasPrice}
-            /></div>
+        <div>            
             <HeaderAdmin />
             <Card>
                 <Card.Body>

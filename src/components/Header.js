@@ -1,8 +1,8 @@
-import logo from '../logo.svg';
-import React, {useState} from 'react';
+import logo from '../images/logo.png';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Navbar, Container, Nav} from 'react-bootstrap';
-const Header = () => {    
+import { Navbar, Container, Nav } from 'react-bootstrap';
+const Header = () => {
 
     return (
 
@@ -12,10 +12,11 @@ const Header = () => {
                     <Navbar.Brand href="#home">
                         <img
                             src={logo}
-                            width="30"
-                            height="30"
+                            width="90"
+                            height="80"
+                            style={{ marginLeft: '2em', marginTop: '.5em' }}
                             className="d-inline-block align-top"
-                            alt="React Bootstrap logo"
+                            alt="Company logo"
                         />
                     </Navbar.Brand>
                 </Container>
@@ -33,16 +34,15 @@ const Header = () => {
                         }>
                             About
                         </NavLink>
-                        <NavLink className="px-3" to="/contactus" style={({ isActive }) =>
+                        <NavLink className="px-3" to="/contact" style={({ isActive }) =>
                             isActive ? { color: '#fff', background: 'gray', textDecoration: 'None', marginTop: '0.5rem', padding: '7px 9px' }
                                 : { color: '#000', background: '#f0f0f0', textDecoration: 'None', marginTop: '0.5rem', padding: '7px 9px' }
                         }>
-                            ContactUs
-                        </NavLink>                        
-
-                        <Navbar.Collapse className="justify-content-end px-3 mt-auto">                            
+                            Contact
+                        </NavLink>
+                        <Navbar.Collapse className="justify-content-end px-3 mt-auto">
                             <Navbar.Text>
-                            <NavLink className="px-3" to="/login" style={{ color: '#000', background: '#f0f0f', marginTop: '0.5rem', padding: '7px 9px' }} >Login</NavLink>
+                                <NavLink className="px-3" to="/login" style={{ color: '#000', background: '#f0f0f', marginTop: '0.5rem', padding: '7px 9px' }} >Login</NavLink>
                                 {/* Signed in as: <a href="#login" style={{ color: '#000', background: '#f0f0f', marginTop: '0.5rem', padding: '7px 9px' }}>SII Pune</a> */}
                             </Navbar.Text>
                         </Navbar.Collapse>

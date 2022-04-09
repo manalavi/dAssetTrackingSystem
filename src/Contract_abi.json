@@ -60,6 +60,50 @@
 		"inputs": [
 			{
 				"indexed": true,
+				"internalType": "string",
+				"name": "description",
+				"type": "string"
+			},
+			{
+				"indexed": true,
+				"internalType": "string",
+				"name": "_orderHash",
+				"type": "string"
+			},
+			{
+				"indexed": true,
+				"internalType": "bytes32",
+				"name": "_roleAccess",
+				"type": "bytes32"
+			}
+		],
+		"name": "NotAuthorized",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "string",
+				"name": "_orderHash",
+				"type": "string"
+			},
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "_stage",
+				"type": "uint256"
+			}
+		],
+		"name": "OrderRejected",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
 				"internalType": "bytes32",
 				"name": "_roleAccess",
 				"type": "bytes32"
@@ -205,6 +249,94 @@
 		"type": "event"
 	},
 	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "string",
+				"name": "_orderHash",
+				"type": "string"
+			},
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "_stage",
+				"type": "uint256"
+			}
+		],
+		"name": "StageClearanceNotValid",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "bytes32",
+				"name": "checkTag",
+				"type": "bytes32"
+			},
+			{
+				"indexed": true,
+				"internalType": "bytes32",
+				"name": "toMatchTag",
+				"type": "bytes32"
+			},
+			{
+				"indexed": true,
+				"internalType": "bool",
+				"name": "check",
+				"type": "bool"
+			}
+		],
+		"name": "ValidateStageFailed",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "bytes32",
+				"name": "checkTag",
+				"type": "bytes32"
+			},
+			{
+				"indexed": true,
+				"internalType": "bytes32",
+				"name": "toMatchTag",
+				"type": "bytes32"
+			},
+			{
+				"indexed": true,
+				"internalType": "bool",
+				"name": "check",
+				"type": "bool"
+			}
+		],
+		"name": "ValidateStagePassed",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "string",
+				"name": "_orderHash",
+				"type": "string"
+			},
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "stage",
+				"type": "uint256"
+			}
+		],
+		"name": "orderStatusSet",
+		"type": "event"
+	},
+	{
 		"inputs": [
 			{
 				"internalType": "bytes32",
@@ -333,6 +465,21 @@
 				"internalType": "string",
 				"name": "_orderHash",
 				"type": "string"
+			},
+			{
+				"internalType": "address",
+				"name": "_accountFrom",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "dosesCount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "_accountTo",
+				"type": "address"
 			}
 		],
 		"name": "orderVaccineBatch",
@@ -354,6 +501,29 @@
 			}
 		],
 		"name": "revokeRole",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "bytes32",
+				"name": "_roleAccess",
+				"type": "bytes32"
+			},
+			{
+				"internalType": "string",
+				"name": "_orderHash",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_stage",
+				"type": "uint256"
+			}
+		],
+		"name": "setOrderStatus",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -455,9 +625,9 @@
 				"type": "bytes32"
 			},
 			{
-				"internalType": "uint256",
+				"internalType": "address",
 				"name": "",
-				"type": "uint256"
+				"type": "address"
 			}
 		],
 		"name": "getAccounts",
@@ -471,6 +641,11 @@
 				"internalType": "address",
 				"name": "account",
 				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "dosesAvailable",
+				"type": "uint256"
 			}
 		],
 		"stateMutability": "view",
@@ -479,11 +654,48 @@
 	{
 		"inputs": [
 			{
+				"internalType": "string",
+				"name": "_orderHash",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_i",
+				"type": "uint256"
+			}
+		],
+		"name": "getCurentOrderStatus",
+		"outputs": [
+			{
 				"internalType": "bytes32",
-				"name": "_roleAccess",
+				"name": "",
 				"type": "bytes32"
 			}
 		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_orderHash",
+				"type": "string"
+			}
+		],
+		"name": "getCurrentStage",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
 		"name": "getManuAccounts",
 		"outputs": [
 			{
@@ -497,11 +709,35 @@
 						"internalType": "address",
 						"name": "account",
 						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "dosesAvailable",
+						"type": "uint256"
 					}
 				],
 				"internalType": "struct Main.Account[]",
-				"name": "accdetail",
+				"name": "",
 				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_accountTo",
+				"type": "address"
+			}
+		],
+		"name": "getManufDoseCount",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
 			}
 		],
 		"stateMutability": "view",
@@ -589,6 +825,35 @@
 		"type": "function"
 	},
 	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "ManufacturersAccounts",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "accName",
+				"type": "string"
+			},
+			{
+				"internalType": "address",
+				"name": "account",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "dosesAvailable",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
 		"inputs": [],
 		"name": "manufacturersCount",
 		"outputs": [
@@ -620,6 +885,25 @@
 				"internalType": "string",
 				"name": "manufacturerDetailsHash",
 				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"name": "orderMap",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "currentStage",
+				"type": "uint256"
 			}
 		],
 		"stateMutability": "view",
@@ -668,6 +952,25 @@
 				"internalType": "bool",
 				"name": "",
 				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "stages",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
 			}
 		],
 		"stateMutability": "view",

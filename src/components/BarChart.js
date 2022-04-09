@@ -33,23 +33,23 @@ export const options = {
   },
 };
 
-const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];  
 
 export const data = {
   labels,
   datasets: [
     {
-      label: 'Dataset 1',
-      data: [10,5,6,4,3,2,7],
+      label: 'Vaccine Production based on months',
+      data: [10, 5, 6, 4, 3, 2, 7],
       backgroundColor: 'darkblue',
-    }    
+    }
   ],
 };
 
 export default function BarChart() {
-    return(
-        <div>
-            <Bar options={options} data={data} />
-        </div>
-    );
+  return (
+    <div>            
+      <Bar options={options} data={data} />
+    </div>
+  );
 }
