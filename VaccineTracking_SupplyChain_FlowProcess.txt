@@ -1,0 +1,308 @@
+Supply Chain for Vaccine Tracking
+
+Stacks:
+1. Solidity - Smart Contract
+2. Ganache - Private blockchain
+3. Frontend - React
+4. ethersjs - Web3 Connector
+5. IPFS - inter planetery file storage
+
+
+Tommorrow Tasks:
+
+[Vinay]
+3. if point 2 done then => fee receipt [implementation].
+4. Smart contract - stage clearance function to be added. [discussion]
+
+[Yash, Om]
+5. mapping demo implementation basic with marker coordinates fetch from firebase [Yash]
+	1. implemnent -> use plain JS to plot map details. [implementation]
+	2. Do in react.[discussion, implementation]
+6. Mobile firebase connection login details. [implementation] [Om, Yash]
+
+Pending work carry forward..
+[Friday]
+7. if receipt and transactions done, then QR code implementation -> Dashboard changes
+
+8. If all working then testing with GPS moving to change data
+
+
+
+
+Steps
+1. Blockchain Explorer.  -- done but ipfs connection left.
+	-> block.timestamp (uint): current block timestamp
+	-> tx.gasprice (uint): gas price of the transaction
+        -> tx.origin (address): sender of the transaction (full call chain)
+2. Dashboard. -- done but data input left , testing of data left.
+3. No Profile update function. -- done
+4. Form for ordering vaccine via healthcarecenter Admin. 
+	-- done but fetch manuf accounts left and submit redirect left.
+5. Map plotting.
+6. Map on React.
+
+****Completed Tasks****
+1. Completed connecting the metamask with etherjs from react-frontend
+2. installed IPFS package.
+3. Login via firebase - admin name, password, and data pointID - (manufactureid, distributorid, healthcareCenterid, superadminid)
+> to include protected routes for admin, manufacturers, healthcarecenters and distributors.
+2. Gasprice, gaslimit transaction [implementation].
+
+****Pending Tasks****
+------------------
+-> to listen to events of order details get blockNumber, getGasPrice, etc.
+-> add a new function in solidity for storing the complete order status in ipfs.
+------------------
+
+-> a dashboard viewing map for local public and status of the vaccinebatches.
+-> manufacturer, healthcarecenter, distributor seperate real time map details, table for viewing data.
+1. GenerateReceipt function to be called from the frontend need to recheck
+	while writing the frontend code.
+2. Use IPFS for storing the data.
+3. Data to be inserted via frontend 
+	such as array of stage clearances.
+
+Charts analytics
+1. Freight's Chart
+2. Approaching Deadlines
+3. Orders Details
+	A] Manufacturer - Dashboard
+	1. Vaccines Available in Total at the unit.
+		-> Avaiable, Currently Produced, Dispatched
+		-> Shipped, Inspected, Dispatched Status		
+	2. Vaccines Delivery Status
+		-> Vaccine Batches Dispatched
+		-> Vaccines Batches Available
+		-> Vaccines Batches Delivered
+	3. Vaccines Batches Delivery History Status
+		-> Table containing the history status for vaccine delivery
+	
+	B] Distributor - Dashboard
+	1. Vaccines Batches available at the store
+		-> Total Count - Vaccines
+		-> Shipped, Inspected, Dispatched Status
+	2. Vaccines Dispatched Status
+		-> Vaccine Batches Dispatched
+		-> Vaccines Batches Available
+		-> Vaccines Batches Delivered
+	3. Vaccines Batches Delivery History Status
+		-> Table containing the history status for vaccine status
+		
+	C] Healthcarecenter - Dashboard
+	1. Vaccines Available at the center
+		-> Total Count - Vaccines
+		-> Vaccinated Vaccines, Vaccines avialable
+		-> Patient's Count, Vaccines Count - Chart
+	2. Vaccines Batches Delivery History Status
+		-> Table containing the history status for vaccine status					
+
+
+Steps for inserting data to blockchain via ipfs.
+DataPoints.
+Manufacturer
+1. data => JSON
+	plantName,
+	accHolder,
+	phno,
+	vaccinesProduced => Array
+ storing of hash in the mapping of manufacturer as address => stringHash
+
+Distributor
+1. data => JSON
+	distrName,
+	accHolder,
+	phno,
+  storing of hash in the mapping of distributor as address => stringHash
+
+HealthCareCenter
+1. data => JSON
+	healthCName,
+	accHolder,
+	phno,
+	vaccinesAvailable => Array
+ storing of hash in the mapping of healthcCenter as address => stringHash
+
+VaccineDelivery
+1. data => JSON
+	deliveryName,
+	phno,
+	age,
+	gender,
+	aadharNo
+ storing of hash in the mapping of vaccinedelivery as address => stringHash
+
+VaccineBatches
+1. data => JSON
+	blockNo,
+	blockTxnNo,
+	txn,
+	from,
+	to,
+	dosesCount,
+	vaccineType,
+	stages => Array
+ storing of hash in the mapping of vaccinebatches as address => stringHash
+
+
+***VaccineBatch Stages/Flow*** [Fixed Array]
+1. Manufactured
+2. Manufactured - Inspected
+3. Shipped
+4. Shipped - Inspected
+5. Arriving
+6. Arrived
+7. VaccineBatch - Delivered
+8. VaccineBatch - Rejected
+
+----------------------------------
+For Updating the OrderStages/ Stage clearances modes only Authorized data points will do the assigned stage clearance.
+Ex. 1. Manufacturer - Manufactured - Manufacturer
+    2. Manufacturer - Inspected - Manufacturer
+    3. Manufacturer - Shipped - Manufacturer
+    
+    4. Distributor - Arrived - Distributor
+    5. Distributor - Inspected - Distributor
+    6. Distributor - Shipped - Distributor
+    
+    7. HealthCareCenter - Arrived - HealthCareCenter
+    8. HealtCareCenter - Inspected - HealthCareCenter
+    9. HealthCareCenter - HealthCareCenter
+    10. HealthCareCenter - Delivered/Accepted - HealthCareCenter
+    
+    11. VaccineBatch - Rejected - All data points
+-----------------------------------	
+
+***VaccineBatch Order*** [Fixed Array] - Done
+Five HealthCare Center registered can place order for VaccineBatch.
+1. HealthCareCenter1
+2. HealthCareCenter2
+3. HealthCareCenter3
+4. HealthCareCenter4
+5. HealthCareCenter5
+
+***Manufacturer*** [Fixed Array] - Done
+1. Manufacturer1
+
+***Distributors*** [Fixed Array] - Done
+1. Distributor1
+2. Distributor2
+3. Distributor3
+
+
+DeliveryPersonDetails [struct] - Done
+{ name, phno, age, gender, aadharNo}
+
+VaccineBatchDetails [struct]
+{blockNo, ordered_from, ordered_to, vaccinetype, dosesCount, dateoforder, sigBy[], stages[]}	
+
+ManufacturerDetails [struct] - Done
+{plantName, accHolderAddress, location, sig, vaccinesProduced[]}
+ 
+DistributorDetails [struct] - Done
+{distributorName, accHolderAddress, location, sig}
+
+HealthCareCenterDetails [struct] - Done
+{ healthcarecenterName, accHolderAddress, location, sig, vaccinesAvailable}
+
+
+****Ex: HealthCareCenter1 ordered 500 doses of vaccines****
+	1. The manufacturer registered (manufacturer registered only one) will recieve the order.
+		a. The system will push an notification to the manufacturerAccount. 
+		b. manufacturerAccount will acknowledge the notification and process the order placed.
+		c. The HealthCareCenter1 will be given a bill generated by the systm signed by the manufacturer.
+	2. The ordered vaccines will be manufactured and inspected.
+	3. The ordered will be shipped.
+	4. The system will assign the delivery person for the required order and the order is shipped. 
+		a. The HealthCareCenter1 will then recieve an push notification that the order is inspected,shipped.
+		b. The HealthCareCenter1 will acknowledge the notification.
+		c. The delivery person will get an notification regarding the order he has to delivered to the 			assigned location.
+		d. The HealthCareCenter1 will recieve the notification regarding the delivery person details.
+	5. The system designed for only the local public can view the map showing the location of the vaccineBatch,
+		and the quality inspection details of the vaccineBatches.
+	6. All the private account holders such as the distributors, manufacturers and the healthcarecenters will 			recieve the accurate confidential details about the vaccineBatches tracking.
+	7. The vaccineBatch will be arrived at the distributor where the VaccineBatch will be inspected again, 			sending the status to the system.
+	8. After each successfull stage clearance, a QR Code will be generated which will be an ecrypted message 			containing the details of the vaccineBatch Stage Clearance.
+	9. The system will acknowledge the stage clearance and will update the status on the blockchain.
+	10. When the vaccineBatch will get arrived at the HealthCareCenter1, the stage clearance will get updated 			and the status will update on the blockchain.
+	11. Based on the vaccineBatch status, if the status is upto the policy defined by the government, then a 			certificate will be signed by the system and given to the vaccineBatch for the usage.
+
+***Encryption of the stage clearance providing extra security to the tracking process***
+1. Stage clearances will be stored in an fixed array stored on the blockchain.
+2. When the adminAccount select the specific stage clearance type, then the algorithm validates the stage clearance
+	and then checks for the previous stage clearances and validates it too which provides complete security with 		the tracking process. 
+3. After each stage clearance, the system will generate the QR code to scan and validate the details by the quality 	inspection personnel.
+	
+
+***Access Control*** [DONE]
+1. SuperAdmin - System Admin
+2. ManufactureAdmin - ManufacturerAccount
+3. DistributorAdmin - DistributorAccount
+4. HealthCareCenterAdmin - HealthCareCenterAccount
+
+5. DeliveryPersonAccount - Controlled by Firebase
+
+All the accounts will be stored in the firebase as well.
+
+
+Pseudocode
+
+contract SupplyChain 
+	abstracting contract Manufacturer
+	abstracting contract Distributor
+	abstracting contract HealthCareC
+	abstracting contract RoleAccess
+Done	
+1. added manufacture details
+2. added distributor details
+3. added healthC details
+4. added vaccinebatches details
+5. ordered vaccinebatches details from healthc to manufacturer
+6. added vaccinedeliverydetails 
+Pending
+ * remove the hashIndexed from the healthc add vaccinebatch function
+ * make a filter method from frontend using vaccinebatch struct 
+ 	to generate receipt by selecting a specific transaction.
+ * filter by date, from , to, doses and vaccinetype.
+1. generate bill details from manufacturer to healthc
+2. add vaccineproduced push array to manufacturer details
+3. add vaccinesAvaiable push array to healthc details
+4. add ranges in frontend for pushing string array for order from healthc to manufacturer
+	Ex: multiple option fixed range with dosesCount.
+		1. Covishield - 500 doses
+		2. Covishield - 200 doses, Covaxin: 150 doses
+		3. Covishield - 150 doses, Covaxin: 150 doses, Sputnik: 50 doses
+		4. Covishield - 100 doses, Sputnik: 50 doses
+		5. Covaxin - 50 doses, Sputnik: 100 doses
+
+
+
+Global Variables
+
+        block.coinbase (address): current block miner’s address
+        block.difficulty (uint): current block difficulty
+        block.gaslimit (uint): current block gaslimit
+        block.number (uint): current block number
+        block.blockhash (function(uint) returns (bytes32)): hash of the given block - only works for 256 most recent blocks
+        block.timestamp (uint): current block timestamp
+        msg.data (bytes): complete calldata
+        msg.gas (uint): remaining gas
+        msg.sender (address): sender of the message (current call)
+        msg.value (uint): number of wei sent with the message
+        now (uint): current block timestamp (alias for block.timestamp)
+        tx.gasprice (uint): gas price of the transaction
+        tx.origin (address): sender of the transaction (full call chain)
+        sha3(...) returns (bytes32): compute the Ethereum-SHA3 hash of the (tightly packed) arguments
+        sha256(...) returns (bytes32): compute the SHA256 hash of the (tightly packed) arguments
+        ripemd160(...) returns (bytes20): compute RIPEMD of 256 the (tightly packed) arguments
+        ecrecover(bytes32, uint8, bytes32, bytes32) returns (address): recover public key from elliptic curve signature
+        addmod(uint x, uint y, uint k) returns (uint): compute (x + y) % k where the addition is performed with arbitrary precision and does not wrap around at 2**256.
+        mulmod(uint x, uint y, uint k) returns (uint): compute (x * y) % k where the multiplication is performed with arbitrary precision and does not wrap around at 2**256.
+        this (current contract’s type): the current contract, explicitly convertible to address
+        super: the contract one level higher in the inheritance hierarchy
+        selfdestruct(address): destroy the current contract, sending its funds to the given address
+        .balance: balance of the address in Wei
+        .send(uint256) returns (bool): send given amount of Wei to address, returns false on failure.
+
+
+
+

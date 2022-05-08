@@ -1,0 +1,64 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: hsl(220, 13%, 18%);
+  min-height: 100vmax;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+.selected{background-color: lightgray;}
+
+/* .leaflet-container {
+  width: 100%;
+  height: 100vh;
+} */
+
+.bgAbout{
+  /* background-image: url('http://i.stack.imgur.com/kx8MT.gif'); */
+  background-image: url('../src/images/ani-bg-2.gif');
+  background-size: cover;
+  /* height: 100vh; */
+  padding:0;
+  margin:0;
+}
+
+.bgLogin{
+  /* background-image: url('http://i.stack.imgur.com/kx8MT.gif'); */
+  background-image: url('../src/images/ani-bg-3.gif');
+  background-size: cover;
+  height: 100vh;
+  padding:0;
+  margin:0;
+}
