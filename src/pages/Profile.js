@@ -1,5 +1,5 @@
 import { ethers } from 'ethers';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 // import { ethers } from 'ethers';
 import { Card, FormControl, Col, Row, Button, InputGroup } from 'react-bootstrap';
 import connect from '../utils/connect';
@@ -9,6 +9,11 @@ const role = localStorage.getItem("role");
 const roleName = localStorage.getItem("roleName");
 
 export default function Profile() {
+
+    useEffect(() => {
+		document.title = 'BE Project | Profile';
+	}, []);
+
     const [defaultAccount, setDefaultAccount] = useState(null);
     const [contract, setContract] = useState(null);
     const [data, setData] = useState({

@@ -1,7 +1,7 @@
 import '../contactStyle.css'
 import { db } from '../utils/firebase'
 import { ref, set } from "firebase/database";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Row from 'react-bootstrap/Row'
 import { Container, Button, Form } from 'react-bootstrap'
 import { useAlert } from "react-alert";
@@ -11,6 +11,10 @@ import Header from '../components/Header';
 const userId = Date.now();
 
 export default function Contact() {
+
+    useEffect(() => {
+		document.title = 'BE Project | Contact';
+	}, []);
 
   const alert = useAlert();
 

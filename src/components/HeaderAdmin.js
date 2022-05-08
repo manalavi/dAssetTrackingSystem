@@ -148,7 +148,6 @@ export default function HeaderAdmin() {
                                     <NavDropdown.Item onClick={logout} >Logout</NavDropdown.Item>
                                     {/* <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item> */}
                                     <NavDropdown.Divider />
-                                    <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
                                 </NavDropdown>
                             </Navbar.Text>
                         </Navbar.Collapse>

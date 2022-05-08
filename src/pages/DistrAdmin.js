@@ -8,6 +8,11 @@ import BarChart from '../components/BarChart';
 import TableChart from '../components/TableChart';
 
 export default function DistrAdmin(){
+
+    useEffect(() => {
+		document.title = 'BE Project | Admin';
+	}, []);
+
     return(
         <div>
             <div><HeaderAdmin /></div>            

@@ -33,6 +33,11 @@ import TableChart from '../components/TableChart';
 
 
 export default function ManufAdmin() {
+
+    useEffect(() => {
+		document.title = 'BE Project | Admin';
+	}, []);
+
     return (
         <div>
         <div><HeaderAdmin /></div>            

@@ -10,6 +10,10 @@ import {useNavigate } from 'react-router-dom';
 
 export default function HealthCAdmin() {    
 
+    useEffect(() => {
+		document.title = 'BE Project | Admin';
+	}, []);
+
     const navigate = useNavigate();
 
     return (

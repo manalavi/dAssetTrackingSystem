@@ -6,6 +6,10 @@ import Map from '../components/MainRouteMap'
 import CovidData from '../components/CovidData';
 
 const Home = () => {
+    
+    useEffect(() => {
+		document.title = 'BE Project | Home';
+	}, []);
 
     const [deliveries, setDeliveries] = useState(delivery);    
 

@@ -8,6 +8,10 @@ import { v4 as uuidv4 } from 'uuid';
 
 const Form = () => {
 
+    useEffect(() => {
+		document.title = 'BE Project | Login';
+	}, []);
+
     const [name, setName] = useState('');
     const [pass, setPass] = useState('');
     const [role, setRole] = useState('');

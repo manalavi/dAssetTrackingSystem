@@ -3,10 +3,15 @@ import linkedin from '../images/linkedin.png'
 import github from '../images/github.png'
 import '../App.css'
 import logo from '../images/logo.png'
-import React from 'react';
+import React, {useEffect} from 'react';
 import Header from '../components/Header';
 import { Card, Row, Col, Container } from 'react-bootstrap'
 export default function About() {
+
+    useEffect(() => {
+		document.title = 'BE Project | About';
+	}, []);
+
     return (
         <div className="bgAbout">
             <div><Header /></div>

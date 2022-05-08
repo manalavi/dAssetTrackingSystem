@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, Button, Card, Row, Col, RangeSlider } from 'react-bootstrap'
 import FormRange from 'react-bootstrap/esm/FormRange';
 import { data } from '../components/BarChart';
@@ -12,6 +12,11 @@ const ipfs = create({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' })
 
 
 export default function OrderVaccine() {
+
+    useEffect(() => {
+		document.title = 'BE Project | Order';
+	}, []);
+
     const [userRole, setUserRole] = useState('');
     const [ischecked, setIsChecked] = useState(false);
     const [vaccines, setVaccines] = useState([]);

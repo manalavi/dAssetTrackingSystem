@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BigNumber, ethers } from 'ethers';
 import { Button, Card, Table } from 'react-bootstrap';
 import connect from '../utils/connect';
@@ -9,6 +9,11 @@ const ipfs = create({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' });
 
 
 export default function Explorer() {
+
+    useEffect(() => {
+		document.title = 'BE Project | Explorer';
+	}, []);
+
     const [txDetails, setTxDetails] = useState([]);
     let val = ethers.utils.formatEther("0x01f4");
     console.log(val);
